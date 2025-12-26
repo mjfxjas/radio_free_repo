@@ -1,0 +1,25 @@
+# Generated Liquidsoap config
+set("log.file.path", "/var/log/liquidsoap/liquidsoap.log")
+set("log.stdout", true)
+set("server.telnet", false)
+
+# Pull tracks from the mounted music directory. Liquidsoap reloads the directory
+# periodically so newly-synced files show up without restarts.
+music = playlist(reload=600, mode="random", "${MUSIC_DIR}")
+
+# Fallback to brief silence if the playlist is empty.
+radio = fallback(track_sensitive=false, [music, blank(duration=2.)])
+
+output.icecast(
+  %mp3(bitrate=${STREAM_BITRATE_KBPS}, stereo=true),
+  host="${ICECAST_HOST}",
+  port=${ICECAST_PORT},
+  password="${ICECAST_SOURCE_PASSWORD}",
+  mount="${ICECAST_MOUNT}",
+  name="${STATION_NAME}",
+  description="${STATION_DESCRIPTION}",
+  url="http://${ICECAST_HOST}:${ICECAST_PORT}${ICECAST_MOUNT}",
+  genre="eclectic",
+  public=true,
+  radio
+)

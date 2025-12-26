@@ -1,0 +1,7 @@
+.env
+ops/generated/
+ops/logs/
+music/
+.DS_Store
+terraform/.terraform/
+terraform/*.tfstate*

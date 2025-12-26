@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self' https://radio.theatrico.org http://44.193.200.105:8000; connect-src 'self' https://radio.theatrico.org http://44.193.200.105:8000; base-uri 'none'; object-src 'none'"
+    />
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/theatrico-marquee.png" />
+    <link rel="apple-touch-icon" href="/assets/theatrico-marquee.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>RADIO FREE CHATTANOOGA</title>
+    <meta
+      name="description"
+      content="Listen to Radio Free Chattanooga live stream."
+    />
+    <meta property="og:title" content="RADIO FREE CHATTANOOGA" />
+    <meta property="og:description" content="Live radio stream from Chattanooga." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://theatrico.org/stream/" />
+    <meta property="og:image" content="https://theatrico.org/assets/theatrico-marquee.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="RADIO FREE CHATTANOOGA" />
+    <meta name="twitter:description" content="Live radio stream from Chattanooga." />
+    <meta name="twitter:image" content="https://theatrico.org/assets/theatrico-marquee.png" />
+    <link rel="stylesheet" href="./stream.css" />
+  </head>
+  <body class="stream-shell">
+    <header class="stream-header">
+      <span class="header-wordmark">RADIO FREE CHATTANOOGA · EST. 2025</span>
+    </header>
+
+    <main id="stream-main" class="stream-main" tabindex="-1">
+      <section class="player" aria-label="Stream player">
+        <div class="controls-card">
+          <button class="play-button" type="button" data-play aria-pressed="false">
+            <span class="icon icon-play" aria-hidden="true"></span>
+          </button>
+          <div class="status-pill" aria-live="polite">
+            <span class="status-dot" data-status-dot></span>
+            <span class="status-value" data-status>Idle</span>
+          </div>
+          <div class="stream-info">
+            <button class="info-button" type="button" data-copy>
+              <span class="info-label">Stream URL</span>
+              <span class="info-value" data-stream-url></span>
+              <span class="copy-hint" aria-hidden="true">copy</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <audio data-audio preload="none"></audio>
+    </main>
+
+    <script type="module" src="./stream.js"></script>
+  </body>
+</html>
