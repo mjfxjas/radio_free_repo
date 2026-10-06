@@ -5,3 +5,7 @@ music/
 .DS_Store
 terraform/.terraform/
 terraform/*.tfstate*
+
+# Saved Terraform plans are generated locally, not source files.
+terraform/tfplan
+*.tfplan
