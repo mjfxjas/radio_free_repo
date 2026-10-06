@@ -1,12 +1,12 @@
 # Radio Free Chattanooga
 
-Live internet radio streaming platform built on AWS infrastructure.
+Icecast and Liquidsoap streaming setup with Docker, Terraform, and a static web player.
 
 **Live Demo**: <https://www.theatrico.org/stream/>
 
 ## Overview
 
-24/7 automated radio station streaming MP3 audio to web and mobile clients. Built with AWS cloud services, Docker containerization, and modern web technologies.
+Liquidsoap selects MP3 audio and sends it to Icecast. Nginx proxies the stream, and the web player is served from S3 through CloudFront.
 
 ## Tech Stack
 
@@ -33,38 +33,6 @@ Live internet radio streaming platform built on AWS infrastructure.
 - **Space Mono** - Monospace typography
 
 ## Architecture
-
-```
-┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
-│   CloudFront    │────│       S3         │────│   Web Client    │
-│      (CDN)      │    │  (Static Site)   │    │   (Browser)     │
-└─────────────────┘    └──────────────────┘    └─────────────────┘
-                                |
-                                │ Stream Request
-                                ▼
-┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
-│   Route 53      │────│      EC2         │────│    Docker       │
-│     (DNS)       │    │   t3.micro       │    │   Containers    │
-└─────────────────┘    └──────────────────┘    └─────────────────┘
-                                │                        │
-                                │                        ▼
-                                │               ┌─────────────────┐
-                                │               │     nginx       │
-                                │               │  (SSL Proxy)    │
-                                │               └─────────────────┘
-                                │                        │
-                                │                        ▼
-                                │               ┌─────────────────┐
-                                │               │    Icecast      │
-                                │               │ (Stream Server) │
-                                │               └─────────────────┘
-                                │                        ▲
-                                │                        │
-                                │               ┌─────────────────┐
-                                └───────────────│   Liquidsoap    │
-                                                │ (Audio Engine)  │
-                                                └─────────────────┘
-```
 
 ### Data Flow
 
@@ -98,7 +66,7 @@ radio_free_repo/
 1. **Clone and setup**
 
    ```bash
-   git clone <repo-url>
+   git clone https://github.com/mjfxjas/radio_free_repo.git
    cd radio_free_repo
    cp .env.example .env
    ```
@@ -172,12 +140,11 @@ Place MP3 files in the `music/` directory. Liquidsoap will automatically shuffle
 ## Contributing
 
 1. Fork the repository
-2. Create feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing-feature`)
+2. Create feature branch (`git checkout -b fix/player-buffering`)
+3. Commit changes (`git commit -m 'Handle player buffering'`)
+4. Push to branch (`git push origin fix/player-buffering`)
 5. Open Pull Request
 
 ## License
 
 MIT License - see LICENSE file for details.
-# radio_free_repo
